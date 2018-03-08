@@ -21,10 +21,11 @@ public class betting_dialouge1 extends Dialog implements View.OnClickListener {
     Button cancel, place;
     EditText etstake;
     String steam1, steam2, sbalance, srate;
-    int irate, istake,iprice;
+    float irate, istake,iprice;
 
-    public betting_dialouge1(@NonNull Context context) {
-        super(context);
+    public betting_dialouge1(@NonNull Context context, int themeResId) {
+        super(context, themeResId);
+
         setContentView(R.layout.dialouge_betting);
         SharedPreferences sp = context.getSharedPreferences("user_info", MODE_PRIVATE);
         steam1 = sp.getString("team1", "");
@@ -44,6 +45,9 @@ public class betting_dialouge1 extends Dialog implements View.OnClickListener {
         rate = findViewById(R.id.rate);
         rate.setText(srate);
         etstake=findViewById(R.id.stake);
+
+        etstake.setText("0");
+
         add500 = findViewById(R.id.stake_500);
         add1000 = findViewById(R.id.stake_1000);
         add5000 = findViewById(R.id.stake_5000);
@@ -59,53 +63,53 @@ public class betting_dialouge1 extends Dialog implements View.OnClickListener {
         clear.setOnClickListener(this);
         cancel.setOnClickListener(this);
         place.setOnClickListener(this);
-        irate=Integer.parseInt(srate);
+        irate=Float.parseFloat(srate);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.stake_500:
-                istake= Integer.parseInt(etstake.getText().toString());
+                istake= Float.parseFloat(etstake.getText().toString());
                 istake+=500;
                 iprice=(istake*irate)-istake;
-                price1.setText(iprice);
-                profit.setText(iprice);
-                price2.setText("-"+istake);
+                price1.setText(String.valueOf(iprice));
+                profit.setText(String.valueOf(iprice));
+                price2.setText(String.valueOf("-"+istake));
                 etstake.setText(String.valueOf(istake));
 
                 break;
-                case R.id.stake_1000:
-                    istake = Integer.parseInt(etstake.getText().toString());
-                    istake+=1000;
-                    iprice=(istake*irate)-istake;
-                    price1.setText(iprice);
-                    profit.setText(iprice);
-                    price2.setText("-"+istake);
-                etstake.setText(istake);
+            case R.id.stake_1000:
+                istake = Float.parseFloat(etstake.getText().toString());
+                istake+=1000;
+                iprice=(istake*irate)-istake;
+                price1.setText(String.valueOf(iprice));
+                profit.setText(String.valueOf(iprice));
+                price2.setText(String.valueOf("-"+istake));
+                etstake.setText(String.valueOf(istake));
                 break;
             case R.id.stake_5000:
-                istake= Integer.parseInt(etstake.getText().toString());
+                istake= Float.parseFloat(etstake.getText().toString());
                 istake+=5000;iprice=(istake*irate)-istake;
-                price1.setText(iprice);
-                profit.setText(iprice);
-                price2.setText("-"+istake);
-                etstake.setText(istake);
+                price1.setText(String.valueOf(iprice));
+                profit.setText(String.valueOf(iprice));
+                price2.setText(String.valueOf("-"+istake));
+                etstake.setText(String.valueOf(istake));
                 break;
-                case R.id.stake_10000:
-                    istake = Integer.parseInt(etstake.getText().toString());
-                    istake+=10000;
-                    iprice=(istake*irate)-istake;
-                    price1.setText(iprice);
-                    profit.setText(iprice);
-                    price2.setText("-"+istake);
-                    etstake.setText(istake);
+            case R.id.stake_10000:
+                istake = Float.parseFloat(etstake.getText().toString());
+                istake+=10000;
+                iprice=(istake*irate)-istake;
+                price1.setText(String.valueOf(iprice));
+                profit.setText(String.valueOf(iprice));
+                price2.setText(String.valueOf("-"+istake));
+                etstake.setText(String.valueOf(istake));
                 break;
             case R.id.stake_clear:
                 price1.setText("");
-                profit.setText(0);
+                profit.setText("0");
                 price2.setText("0");
-                etstake.setText(0);
+                etstake.setText("0");
                 break;
             case R.id.cancel:
                 dismiss();

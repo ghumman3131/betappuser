@@ -53,7 +53,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        getSupportActionBar().setTitle("Betting Admin");
+        getSupportActionBar().setTitle("Betting User");
 
         fm = getSupportFragmentManager();
 

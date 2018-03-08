@@ -1,89 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.inception.betappuser.fragments.UserDetails"
-    android:padding="10dp">
-<RelativeLayout
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:padding="10dp"
+    android:padding="10dp"
+    tools:context="com.inception.betappuser.fragments.UserDetails">
 
-    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#fe3577a6"
+        android:padding="10dp"
+
+        >
 
 
-    <ImageView
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@drawable/profile"
-        android:id="@+id/profile_img"/>
+        <ImageView
+            android:id="@+id/profile_img"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/profile"
+            />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Name"
-        android:layout_toRightOf="@+id/profile_img"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        android:id="@+id/name_txt"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Balance"
-        android:layout_toRightOf="@+id/profile_img"
-        android:layout_below="@+id/name_txt"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:id="@+id/balance_txt"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00"
-        android:layout_toRightOf="@+id/balance_txt"
-        android:layout_below="@+id/name_txt"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:id="@+id/balance"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Limit"
-        android:layout_toRightOf="@+id/balance"
-        android:layout_below="@+id/name_txt"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:id="@+id/limit_txt"
-        />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="00"
-        android:layout_toRightOf="@+id/limit_txt"
-        android:layout_below="@+id/name_txt"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/black"
-        android:id="@+id/limit"
-        />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/active"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/name_txt"
-        android:layout_marginRight="30dp"
-        android:src="@drawable/active_user"/>
+        <TextView
+            android:id="@+id/name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="0dp"
+            android:layout_toRightOf="@+id/profile_img"
+            android:text="Name"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            />
+
+        <TextView
+            android:id="@+id/balance_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_txt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/profile_img"
+            android:text="Balance"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/balance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/name_txt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/balance_txt"
+            android:text="00"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/limit_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/balance_txt"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/profile_img"
+            android:text="Limit"
+            android:textColor="@color/white" />
+
+        <TextView
+            android:id="@+id/limit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/balance"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_toRightOf="@+id/limit_txt"
+            android:text="00"
+            android:textColor="@color/white" />
+
+        <ImageView
+            android:id="@+id/active"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/name_txt"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/active_user" />
 
     </RelativeLayout>
 </ScrollView>

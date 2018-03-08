@@ -7,11 +7,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="80dp"
-        android:background="#d83577a6"
+        android:background="#fe3577a6"
         >
         <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_margin="15dp"
             android:id="@+id/img_icon"
             android:src="@drawable/cricket"/>
@@ -19,8 +19,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Name"
-            android:textColor="@color/alphawhite"            android:textStyle="bold"
-            android:textSize="20dp"
+            android:textColor="@color/alphawhite"
+            android:textStyle="bold"
+            android:textSize="15sp"
             android:id="@+id/name_txt"
             android:layout_toRightOf="@+id/img_icon"
             android:layout_marginTop="10dp"
@@ -33,29 +34,31 @@
             android:layout_below="@+id/name_txt"
 
             android:text="Back"
-            android:textSize="20dp"/>
+            android:textSize="15sp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/alphawhite"
+            android:textColor="@color/white"
             android:text="Balance:"
             android:id="@+id/bal_txt"
-        android:textSize="18dp"
+            android:textSize="15sp"
             android:background="#d8005999"
             android:layout_toLeftOf="@+id/bal_value"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="30dp"
+            android:paddingLeft="5dp"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:id="@+id/bal_value"
-            android:textSize="18dp"
+            android:textSize="15sp"
             android:background="#d8005999"
             android:text="00"
             android:textColor="@color/alphawhite"
             android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"/>
+            android:layout_marginRight="30dp"
+            android:paddingRight="5dp"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -66,14 +69,14 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#d83577a6"
+    android:background="#fd3577a6"
     >
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/alphawhite"
         android:text="Team 1"
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:id="@id/Team_1"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="20dp"/>
@@ -84,7 +87,7 @@
         android:id="@+id/Team_2"
         android:textColor="@color/alphawhite"
         android:layout_below="@+id/Team_1"
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"/>
     <TextView
@@ -92,7 +95,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/alphawhite"
         android:text=""
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:id="@+id/price_1"
         android:layout_toRightOf="@+id/Team_1"
         android:layout_marginLeft="20dp"
@@ -105,7 +108,7 @@
         android:layout_toRightOf="@+id/Team_2"
         android:layout_below="@+id/Team_1"
         android:textColor="@color/alphawhite"
-        android:textSize="20dp"
+        android:textSize="15sp"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"/>
     <TextView
@@ -117,7 +120,7 @@
         android:id="@+id/rate_txt"
         android:text="RATE"
         android:textColor="@color/alphawhite"
-        android:textSize="25dp"
+        android:textSize="20dp"
         />
 
     <TextView
@@ -128,7 +131,7 @@
         android:layout_below="@+id/rate_txt"
         android:id="@+id/rate"
         android:text="00"
-        android:textSize="25dp"
+        android:textSize="20dp"
         android:textColor="@color/alphawhite"
         />
     <TextView
@@ -141,127 +144,131 @@
         android:textColor="@color/alphawhite"
         android:text="STAKE"
         android:layout_alignParentRight="true"
-        android:textSize="25dp"
+        android:textSize="20dp"
         />
     <EditText
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginLeft="50dp"
         android:layout_below="@+id/stake_txt"
-        android:layout_toRightOf="@+id/rate"
+
         android:id="@+id/stake"
-        android:text="STAKE"
+        android:hint="STAKE"
+        android:paddingLeft="10dp"
         android:background="@color/white"
-        android:layout_alignParentRight="true"
+        android:minWidth="100dp"
+        android:layout_alignStart="@+id/stake_txt"
+        android:textColor="@color/black"
 
         />
-    <TextView
-        android:layout_width="wrap_content"
 
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/alphawhite"
+        android:orientation="horizontal"
         android:layout_below="@+id/rate"
-        android:layout_marginLeft="10dp"
+        android:weightSum="5"
+        android:id="@+id/stake_layout"
         android:layout_marginTop="20dp"
-        android:id="@+id/stake_500"
-        android:text="500"
-        android:textSize="20dp"
-        android:background="#d8005999"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rate"
+        >
 
-        android:layout_marginTop="20dp"
-        android:id="@+id/stake_1000"
-        android:layout_toRightOf="@+id/stake_500"
-        android:text="1000"
-        android:textSize="20dp"
-        android:background="#d8005999"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:textColor="@color/alphawhite"
-        android:paddingRight="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rate"
-        android:layout_toRightOf="@+id/stake_1000"
-        android:layout_marginTop="20dp"
-        android:id="@+id/stake_5000"
-        android:text="5000"
-        android:textSize="20dp"
-        android:textColor="@color/alphawhite"
-        android:background="#d8005999"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rate"
-        android:layout_toRightOf="@+id/stake_5000"
-        android:layout_marginTop="20dp"
-        android:id="@+id/stake_10000"
-        android:textColor="@color/alphawhite"
-        android:text="10000"
-        android:textSize="20dp"
-        android:background="#d8005999"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rate"
-        android:layout_toRightOf="@+id/stake_10000"
-        android:layout_marginTop="20dp"
-        android:textColor="@color/alphawhite"
-        android:id="@+id/stake_clear"
-        android:text="clear"
-        android:textSize="20dp"
-        android:background="#ffea00"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="20dp"
-        android:paddingRight="10dp"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:textColor="@color/alphawhite"
+            android:layout_below="@+id/rate"
+            android:id="@+id/stake_500"
+            android:text="500"
+            android:textSize="15dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:background="#d8005999"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:id="@+id/stake_1000"
+
+            android:text="1000"
+            android:textSize="15dp"
+            android:background="#d8005999"
+
+            android:textColor="@color/alphawhite"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dp"
+
+            android:id="@+id/stake_5000"
+            android:text="5000"
+            android:textSize="15dp"
+            android:textColor="@color/alphawhite"
+            android:background="#d8005999"
+           />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@+id/rate"
+            android:layout_toRightOf="@+id/stake_5000"
+            android:padding="10dp"
+            android:id="@+id/stake_10000"
+            android:textColor="@color/alphawhite"
+            android:text="10000"
+            android:textSize="15dp"
+            android:background="#d8005999"
+            />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_below="@+id/rate"
+            android:layout_toRightOf="@+id/stake_10000"
+            android:textColor="@color/white"
+            android:id="@+id/stake_clear"
+            android:text="Clear"
+            android:padding="10dp"
+            android:textSize="15dp"
+            android:background="#ffd900"
+            />
+    </LinearLayout>
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/cancel"
         android:background="#d8005999"
-        android:layout_below="@+id/stake_500"
-        android:layout_margin="30dp"
+        android:layout_below="@+id/stake_layout"
+        android:layout_marginTop="30dp"
         android:text="Cancel"
-        android:textColor="@color/alphawhite"
+        android:textColor="@color/white"
+        android:textSize="15sp"
         />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/stake_500"
-        android:layout_margin="30dp"
+        android:layout_below="@+id/stake_layout"
+        android:layout_marginTop="30dp"
         android:id="@+id/place"
         android:background="#d8005999"
-        android:textColor="@color/alphawhite"
+        android:textColor="@color/white"
         android:layout_alignParentRight="true"
         android:text="place"
+
+
         />
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="30dp"
         android:background="#5ebc48"
-        android:layout_toRightOf="@+id/cancel"
-        android:layout_below="@+id/stake_500"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/stake_layout"
         android:textColor="@color/alphawhite"
         android:layout_marginTop="20dp">
         <TextView
@@ -269,7 +276,7 @@
             android:layout_height="wrap_content"
             android:text="00"
             android:textSize="15dp"
-            android:textColor="@color/alphawhite"
+            android:textColor="@color/white"
             android:layout_centerInParent="true"
             android:id="@+id/profit"/>
         <TextView
@@ -280,7 +287,7 @@
             android:layout_below="@+id/profit"
             android:id="@+id/profit_txt"
             android:layout_marginTop="20dp"
-            android:textColor="@color/alphawhite"
+            android:textColor="@color/white"
             />
     </RelativeLayout>
 </RelativeLayout>
