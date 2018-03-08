@@ -20,10 +20,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class MatchOddDetails extends AppCompatActivity implements View.OnClickListener{
+public class MatchOddDetails extends AppCompatActivity implements View.OnClickListener {
 
-    private TextView team_1 , back_1 , lay_1 , team_2 , back_2 , lay_2 , team_1_m , team_2_m;
-String balances;
+    private TextView team_1, back_1, lay_1, team_2, back_2, lay_2 ;
+    String balances;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
 
@@ -34,13 +35,12 @@ String balances;
         getSupportActionBar().setTitle("Match Odds");
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        SharedPreferences sp_get = getSharedPreferences("user_info" , MODE_PRIVATE);
-        balances =sp_get.getString("balance","");
+        SharedPreferences sp_get = getSharedPreferences("user_info", MODE_PRIVATE);
+        balances = sp_get.getString("balance", "");
         team_1 = findViewById(R.id.team_1);
         team_2 = findViewById(R.id.team_2);
 
-        team_1_m = findViewById(R.id.team_1_m);
-        team_2_m = findViewById(R.id.team_2_m);
+
 
         back_1 = findViewById(R.id.back_1);
         back_2 = findViewById(R.id.back_2);
@@ -63,15 +63,12 @@ String balances;
         }, 0);
 
 
-
-
     }
 
-    public void getdata()
-    {
+    public void getdata() {
         String event_id = getIntent().getStringExtra("event_id");
 
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://www.lotusbook.com/api/exchange/eventType/"+event_id, new JSONObject(), new Response.Listener<JSONObject>() {
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://www.lotusbook.com/api/exchange/eventType/" + event_id, new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
@@ -80,7 +77,7 @@ String balances;
                 try {
                     JSONArray jsonArray = response.getJSONArray("result");
 
-                    JSONArray jsonArray1 =   jsonArray.getJSONObject(0).getJSONArray("runners");
+                    JSONArray jsonArray1 = jsonArray.getJSONObject(0).getJSONArray("runners");
 
                     JSONObject jsonObject = jsonArray1.getJSONObject(0);
 
@@ -97,15 +94,12 @@ String balances;
 
                     String back2 = jsonObject2.getJSONArray("back").getJSONObject(0).getString("price");
 
-                    String lay2 =  jsonObject2.getJSONArray("lay").getJSONObject(0).getString("price");
+                    String lay2 = jsonObject2.getJSONArray("lay").getJSONObject(0).getString("price");
 
                     team_1.setText(team1);
 
                     team_2.setText(team2);
 
-                    team_1_m.setText(team1);
-
-                    team_2_m.setText(team2);
 
                     back_1.setText(back1);
 
@@ -114,7 +108,6 @@ String balances;
                     back_2.setText(back2);
 
                     lay_2.setText(lay2);
-
 
 
                 } catch (JSONException e) {
@@ -130,7 +123,7 @@ String balances;
             }
         });
 
-        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000 ,2 ,2 ));
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
 
         Volley.newRequestQueue(MatchOddDetails.this).add(jsonObjectRequest);
 
@@ -141,9 +134,8 @@ String balances;
     public boolean onOptionsItemSelected(MenuItem item) {
 
 
-        if(item.getItemId() == android.R.id.home)
-        {
-           finish();
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
 
         return true;
@@ -151,44 +143,47 @@ String balances;
 
     @Override
     public void onClick(View view) {
-        switch (view.getId())
-        {
+        switch (view.getId()) {
             case R.id.back_1:
-                SharedPreferences.Editor sp_dialog =getSharedPreferences("user_info",MODE_PRIVATE).edit();
-                sp_dialog.putString("team1", String.valueOf(team_1));
-                sp_dialog.putString("team2", String.valueOf(team_2));
-                sp_dialog.putString("back1", String.valueOf(back_1));
+                SharedPreferences.Editor sp_dialog = getSharedPreferences("user_info", MODE_PRIVATE).edit();
+                sp_dialog.putString("team1", team_1.getText().toString());
+                sp_dialog.putString("team2", team_2.getText().toString());
+                sp_dialog.putString("back1", back_1.getText().toString());
                 sp_dialog.putString("balance", balances);
-                betting_dialouge1 dialouge = new betting_dialouge1(MatchOddDetails.this);
+                sp_dialog.commit();
+                betting_dialouge1 dialouge = new betting_dialouge1(MatchOddDetails.this, R.style.Theme_Dialog);
                 dialouge.show();
                 break;
             case R.id.back_2:
-                SharedPreferences.Editor sp_dialog1 =getSharedPreferences("user_info",MODE_PRIVATE).edit();
-                sp_dialog1.putString("team1", String.valueOf(team_1));
-                sp_dialog1.putString("team2", String.valueOf(team_2));
-                sp_dialog1.putString("back2", String.valueOf(back_2));
+                SharedPreferences.Editor sp_dialog1 = getSharedPreferences("user_info", MODE_PRIVATE).edit();
+                sp_dialog1.putString("team1", team_1.getText().toString());
+                sp_dialog1.putString("team2", team_2.getText().toString());
+                sp_dialog1.putString("back2", back_2.getText().toString());
                 sp_dialog1.putString("balance", balances);
-                betting_dialouge2 dialouge1 = new betting_dialouge2(MatchOddDetails.this);
+                sp_dialog1.commit();
+                betting_dialouge2 dialouge1 = new betting_dialouge2(MatchOddDetails.this, R.style.Theme_Dialog);
 
                 dialouge1.show();
                 break;
             case R.id.lay_1:
-                SharedPreferences.Editor sp_dialog2 =getSharedPreferences("user_info",MODE_PRIVATE).edit();
-                sp_dialog2.putString("team1", String.valueOf(team_1));
-                sp_dialog2.putString("team2", String.valueOf(team_2));
-                sp_dialog2.putString("lay1", String.valueOf(lay_1));
+                SharedPreferences.Editor sp_dialog2 = getSharedPreferences("user_info", MODE_PRIVATE).edit();
+                sp_dialog2.putString("team1", team_1.getText().toString());
+                sp_dialog2.putString("team2", team_2.getText().toString());
+                sp_dialog2.putString("lay1", lay_1.getText().toString());
                 sp_dialog2.putString("balance", balances);
-                lay_dialouge1 dialouge2 = new lay_dialouge1(MatchOddDetails.this);
+                sp_dialog2.commit();
+                lay_dialouge1 dialouge2 = new lay_dialouge1(MatchOddDetails.this, R.style.Theme_Dialog);
                 dialouge2.show();
                 break;
             case R.id.lay_2:
 
-                SharedPreferences.Editor sp_dialog3 =getSharedPreferences("user_info",MODE_PRIVATE).edit();
-                sp_dialog3.putString("team1", String.valueOf(team_1));
-                sp_dialog3.putString("team2", String.valueOf(team_2));
-                sp_dialog3.putString("lay2", String.valueOf(lay_2));
+                SharedPreferences.Editor sp_dialog3 = getSharedPreferences("user_info", MODE_PRIVATE).edit();
+                sp_dialog3.putString("team1", team_1.getText().toString());
+                sp_dialog3.putString("team2", team_2.getText().toString());
+                sp_dialog3.putString("lay2", lay_2.getText().toString());
                 sp_dialog3.putString("balance", balances);
-                lay_dialouge2 dialouge3 = new lay_dialouge2(MatchOddDetails.this);
+                sp_dialog3.commit();
+                lay_dialouge2 dialouge3 = new lay_dialouge2(MatchOddDetails.this, R.style.Theme_Dialog);
                 dialouge3.show();
                 break;
         }

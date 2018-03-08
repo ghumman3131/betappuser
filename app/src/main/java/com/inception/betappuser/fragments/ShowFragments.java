@@ -1,6 +1,7 @@
 package com.inception.betappuser.fragments;
 
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -40,6 +41,7 @@ public class ShowFragments extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private ProgressDialog progressDialog ;
 
 
     public ShowFragments() {
@@ -58,6 +60,13 @@ public class ShowFragments extends Fragment {
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL , false));
 
 
+        progressDialog = new ProgressDialog(getActivity());
+
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+
+
         get_data();
 
         return v;
@@ -72,6 +81,8 @@ public class ShowFragments extends Fragment {
             public void onResponse(JSONObject response) {
 
                 System.out.println(response);
+
+                progressDialog.hide();
 
                 try {
                     jsonArray = response.getJSONArray("result");
