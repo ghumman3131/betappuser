@@ -104,11 +104,22 @@
                     android:id="@+id/team_1"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.80"
                     android:text="Team 1"
                     android:textColor="@color/black"
 
                     />
+                <TextView
+                    android:id="@+id/on_result1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:text=""
+                    android:textColor="@color/black"
+
+                    />
+
+
 
                 <TextView
                     android:id="@+id/back_1"
@@ -148,12 +159,21 @@
                     android:id="@+id/team_2"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
+                    android:layout_weight="0.8"
                     android:text="Team 2"
                     android:textColor="@color/black"
 
+                    />
+                <TextView
+                    android:id="@+id/on_result2"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.2"
+                    android:text=""
+                    android:textColor="@color/black"
 
                     />
+
 
                 <TextView
                     android:id="@+id/back_2"
@@ -202,6 +222,11 @@
         android:textColor="@color/d_grey"/>
 
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp"
+        android:id="@+id/placed_bets"></android.support.v7.widget.RecyclerView>
 
 
 </LinearLayout>

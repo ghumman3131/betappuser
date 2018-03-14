@@ -9,6 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -20,18 +30,22 @@ public class lay_dialouge1 extends Dialog implements View.OnClickListener {
     TextView team1, team2, name, balance, price1, price2, rate, add500, add1000, add5000, add10000, clear, liability;
     Button cancel, place;
     EditText etstake;
-    String steam1, steam2, sbalance, srate;
-    float irate, istake,iprice;
+    String sdis_id,steam1, steam2, sbalance, srate, sprice1, sprice2, eventid, susername;
+    float irate, istake, iprice, ietstake, ibalance;
+    Context mcontext;
 
     public lay_dialouge1(@NonNull Context context, int themeResId) {
         super(context, themeResId);
-
+this.mcontext=context;
         setContentView(R.layout.lay_dialouge);
         SharedPreferences sp = context.getSharedPreferences("user_info", MODE_PRIVATE);
         steam1 = sp.getString("team1", "");
         steam2 = sp.getString("team2", "");
+        susername = sp.getString("username", "");
         sbalance = sp.getString("balance", "");
         srate = sp.getString("lay1", "");
+        eventid = sp.getString("event_id", "");
+        sdis_id= sp.getString("dis_id", "");
         team1 = findViewById(R.id.Team_1);
         team1.setText(steam1);
         team2 = findViewById(R.id.Team_2);
@@ -40,11 +54,12 @@ public class lay_dialouge1 extends Dialog implements View.OnClickListener {
         name.setText(steam1);
         balance = findViewById(R.id.bal_value);
         balance.setText(sbalance);
+        ibalance = Float.parseFloat(balance.getText().toString());
         price1 = findViewById(R.id.price_1);
         price2 = findViewById(R.id.price_2);
         rate = findViewById(R.id.rate);
         rate.setText(srate);
-        etstake=findViewById(R.id.stake);
+        etstake = findViewById(R.id.stake);
 
         etstake.setText("0");
 
@@ -53,7 +68,7 @@ public class lay_dialouge1 extends Dialog implements View.OnClickListener {
         add5000 = findViewById(R.id.stake_5000);
         add10000 = findViewById(R.id.stake_10000);
         clear = findViewById(R.id.stake_clear);
-        liability = findViewById(R.id.liability);
+       liability = findViewById(R.id.liability);
         cancel = findViewById(R.id.cancel);
         place = findViewById(R.id.place);
         add500.setOnClickListener(this);
@@ -63,7 +78,7 @@ public class lay_dialouge1 extends Dialog implements View.OnClickListener {
         clear.setOnClickListener(this);
         cancel.setOnClickListener(this);
         place.setOnClickListener(this);
-        irate=Float.parseFloat(srate);
+        irate = Float.parseFloat(srate);
     }
 
     @Override
@@ -115,7 +130,72 @@ public class lay_dialouge1 extends Dialog implements View.OnClickListener {
                 dismiss();
                 break;
             case R.id.place:
-                dismiss();
+                sprice1 = price1.getText().toString();
+                sprice2 = price2.getText().toString();
+                ietstake = Float.parseFloat(etstake.getText().toString());
+                if (ietstake > ibalance) {
+                    Toast.makeText(mcontext, "Low balance", Toast.LENGTH_SHORT).show();
+                } else {
+                    if (sprice1.isEmpty()) {
+                        Toast.makeText(mcontext, "ENTER STAKE", Toast.LENGTH_SHORT).show();
+                    } else {
+                        final JSONObject jsonObject = new JSONObject();
+
+                        try {
+                            jsonObject.put("module", "place_bet");
+                            jsonObject.put("username", susername);
+                            jsonObject.put("lose", sprice1);
+                            jsonObject.put("win2", sprice2);
+                            jsonObject.put("lose2", "0");
+                            jsonObject.put("win", "0");
+                            jsonObject.put("rate", srate);
+                            jsonObject.put("team", name.getText().toString());
+                            jsonObject.put("dis_id", sdis_id);
+                            jsonObject.put("event_id", eventid);
+                            jsonObject.put("team2", steam2);
+                            jsonObject.put("bet", "Lay");
+                            jsonObject.put("stake", etstake.getText().toString());
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.print(jsonObject);
+                        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url.ip, jsonObject, new Response.Listener<JSONObject>() {
+                            @Override
+                            public void onResponse(JSONObject response) {
+
+                                System.out.println(response);
+
+                                try {
+                                    if (response.getString("result").equals("done")) {
+
+
+                                        Toast.makeText(mcontext, "Bet placed", Toast.LENGTH_SHORT).show();
+                                        dismiss();
+                                        MatchOddDetails.get_data(mcontext);
+
+
+                                    } else {
+                                        Toast.makeText(mcontext, "Error", Toast.LENGTH_SHORT).show();
+                                    }
+
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                            }
+                        });
+
+                        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
+
+                        Volley.newRequestQueue(mcontext).add(jsonObjectRequest);
+                    }
+                }
                 break;
         }
     }

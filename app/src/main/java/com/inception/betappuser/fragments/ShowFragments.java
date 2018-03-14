@@ -1,4 +1,4 @@
-package com.inception.betappuser.fragments;
+ package com.inception.betappuser.fragments;
 
 
 import android.app.ProgressDialog;
@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -43,6 +44,8 @@ public class ShowFragments extends Fragment {
 
     private ProgressDialog progressDialog ;
 
+    private RequestQueue mRequestQueue ;
+
 
     public ShowFragments() {
         // Required empty public constructor
@@ -67,7 +70,10 @@ public class ShowFragments extends Fragment {
         progressDialog.show();
 
 
-        get_data();
+            mRequestQueue = Volley.newRequestQueue(getContext());
+
+
+       get_data();
 
         return v;
     }
@@ -107,7 +113,9 @@ public class ShowFragments extends Fragment {
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000 ,2 ,2 ));
 
-        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+
+
+        mRequestQueue.add(jsonObjectRequest);
 
 
 
