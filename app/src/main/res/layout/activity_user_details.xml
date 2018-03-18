@@ -7,10 +7,15 @@
     android:padding="10dp"
     tools:context="com.inception.betappuser.fragments.UserDetails">
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="#fe3577a6"
+        android:id="@+id/lay_user"
         android:padding="10dp"
 
         >
@@ -89,4 +94,52 @@
             android:src="@drawable/active_user" />
 
     </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/pass_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/l_grey"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_below="@+id/lay_user"
+        android:padding="5dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@android:drawable/ic_lock_idle_lock" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Change Password"
+    android:textSize="15dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/change_pass_lay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/l_grey"
+        android:gravity="center_vertical"
+        android:orientation="vertical"
+        android:layout_below="@+id/pass_lay"
+        android:padding="5dp">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="New password"
+            android:id="@+id/chnge_pass"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:text="Change Password"
+            android:onClick="change_pass"
+            />
+    </LinearLayout>
+    </LinearLayout>
+
 </ScrollView>
