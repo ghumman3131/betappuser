@@ -67,7 +67,6 @@ String savedid;
         getSupportActionBar().setTitle("Betting User");
 
         fm = getSupportFragmentManager();
-        TextView msg=findViewById(R.id.message_txt);
 
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);

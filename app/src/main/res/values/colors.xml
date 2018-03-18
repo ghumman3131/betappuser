@@ -15,7 +15,8 @@
 
     <color name="white">#fff</color>
     <color name="alphawhite">#c0ffffff</color>
-
+    <color name="Lay">#ff5482</color>
+    <color name="Back">#fd3577a6</color>
 
 
     <color name="red">#dfef0a25</color>
