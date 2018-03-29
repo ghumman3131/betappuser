@@ -30,13 +30,12 @@ import org.json.JSONObject;
 public class HomeActivity extends AppCompatActivity {
 
 
-
     private ActionBarDrawerToggle toggle;
 
     DrawerLayout drawerLayout;
-TextView message;
-String savedid;
-    FragmentManager fm ;
+    TextView message;
+    String savedid;
+    FragmentManager fm;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -71,18 +70,19 @@ String savedid;
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        SharedPreferences sp = getSharedPreferences("user_info" , MODE_PRIVATE);
-        savedid = sp.getString("dis_id","");
+        SharedPreferences sp = getSharedPreferences("user_info", MODE_PRIVATE);
+        savedid = sp.getString("dis_id", "");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.drawer_open, R.string.drawer_close);
         toggle.setDrawerIndicatorEnabled(true);
         drawerLayout.setDrawerListener(toggle);
-        message=findViewById(R.id.message_txt);
+        message = findViewById(R.id.message_txt);
         open_home();
         get_message();
     }
+
     private void get_message() {
         final JSONObject jsonObject = new JSONObject();
 
@@ -100,7 +100,7 @@ String savedid;
                 System.out.println(response);
 
                 try {
-                    JSONObject ob =response.getJSONObject("result");
+                    JSONObject ob = response.getJSONObject("result");
                     message.setText(ob.getString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -130,13 +130,10 @@ String savedid;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if(item.getItemId() == android.R.id.home)
-        {
-            if(drawerLayout.isDrawerOpen(Gravity.START))
-            {
+        if (item.getItemId() == android.R.id.home) {
+            if (drawerLayout.isDrawerOpen(Gravity.START)) {
                 drawerLayout.closeDrawer(Gravity.START);
-            }
-            else {
+            } else {
                 drawerLayout.openDrawer(Gravity.START);
             }
         }
@@ -144,21 +141,19 @@ String savedid;
         return true;
     }
 
-    private void open_home()
-    {
+    private void open_home() {
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.main_frame , new ShowFragments());
+        ft.replace(R.id.main_frame, new ShowFragments());
 
         ft.commit();
     }
 
-    private void open_profile()
-    {
+    private void open_profile() {
 
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.main_frame , new UserDetails());
+        ft.replace(R.id.main_frame, new UserDetails());
 
         ft.commit();
 
@@ -166,12 +161,12 @@ String savedid;
 
     public void logout(View view) {
 
-        SharedPreferences.Editor sp_home = getSharedPreferences("user_info" , MODE_PRIVATE).edit();
+        SharedPreferences.Editor sp_home = getSharedPreferences("user_info", MODE_PRIVATE).edit();
 
         sp_home.clear();
         sp_home.commit();
 
-        startActivity(new Intent(HomeActivity.this , LoginActivity.class));
+        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
 
         finish();
     }
@@ -182,7 +177,7 @@ String savedid;
 
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.main_frame , new UserDetails());
+        ft.replace(R.id.main_frame, new UserDetails());
 
         ft.commit();
 
@@ -194,10 +189,30 @@ String savedid;
 
         FragmentTransaction ft = fm.beginTransaction();
 
-        ft.replace(R.id.main_frame , new ShowFragments());
+        ft.replace(R.id.main_frame, new ShowFragments());
 
         ft.commit();
 
     }
 
+    public void transfer_balance(View view) {
+
+
+        drawerLayout.closeDrawer(Gravity.START);
+
+        Intent i = new Intent(HomeActivity.this, BalanceTransfer.class);
+
+        startActivity(i);
+
+    }
+
+    public void open_statements(View view) {
+
+
+        drawerLayout.closeDrawer(Gravity.START);
+
+        Intent i = new Intent(HomeActivity.this, StatementsActivity.class);
+
+        startActivity(i);
+    }
 }

@@ -26,4 +26,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_match_details">MatchDetailsActivity</string>
+    <string name="title_session">SESSION</string>
+    <string name="title_match_odds">MATCH ODDS</string>
 </resources>

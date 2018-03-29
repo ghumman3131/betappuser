@@ -27,7 +27,7 @@
             android:scrollHorizontally="true"
             android:singleLine="true"
             android:layoutDirection="ltr"
-            android:text="textmoving textmoving "
+            android:text=" "
             android:textColor="#000"
             android:layout_margin="20dp"/>
 
@@ -57,7 +57,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="#fff"
         android:layout_gravity="left"
@@ -135,8 +135,71 @@
             android:background="#ccc"
             android:layout_marginTop="5dp"/>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:onClick="transfer_balance">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_transfer"
+                android:tint="@color/d_grey"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfer Balance"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
 
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ccc"
+            android:layout_marginTop="5dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:clickable="true"
+            android:onClick="open_statements">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_statements"
+                android:tint="@color/d_grey"
+                />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Statements"
+                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                />
+
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ccc"
+            android:layout_marginTop="5dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"

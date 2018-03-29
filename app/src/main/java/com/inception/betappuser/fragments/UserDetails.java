@@ -8,16 +8,21 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.inception.betappuser.BalanceTransfer;
+import com.inception.betappuser.BalanceTransferDialog;
 import com.inception.betappuser.R;
 import com.inception.betappuser.url;
 
@@ -31,10 +36,17 @@ public class UserDetails extends Fragment {
      TextView balance,name,limit;
     ImageView active;
     EditText change_password;
-    String names,balances,actives,limits;
+    String names,actives,limits ;
+
+    public static String bal ;
+
+    Button change_pass ;
+
+    RequestQueue requestQueue;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState)
+    {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_user_details, container, false);
         name = v.findViewById(R.id.name_txt);
@@ -42,26 +54,31 @@ public class UserDetails extends Fragment {
         balance= v.findViewById(R.id.balance);
         change_password=v.findViewById(R.id.chnge_pass);
         limit=v.findViewById(R.id.limit);
+
+
+        requestQueue = Volley.newRequestQueue(getActivity());
+
         SharedPreferences sp = getActivity().getSharedPreferences("user_info" , MODE_PRIVATE);
        names= sp.getString("username","");
-       actives=sp.getString("status","");
-       balances =sp.getString("balance","");
-        limits =sp.getString("limit","");
+
         name.setText(names);
-        balance.setText(balances);
-        limit.setText(limits);
-        if(actives.equals("1"))
-        {
-            active.setImageDrawable(getResources().getDrawable(R.drawable.active_user));
 
-        }
 
-        else {
-            active.setImageDrawable(getResources().getDrawable(R.drawable.block_user));
 
-        }
+        change_pass = v.findViewById(R.id.change_pass);
+
+
+        change_pass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                change_pass();
+            }
+        });
         return  v;
-    }public void change_pass(View view) {
+    }
+
+    public void change_pass() {
         final String pass = change_password.getText().toString();
         if (pass.equals(""))
         {
@@ -137,6 +154,84 @@ public class UserDetails extends Fragment {
         }
     }
 
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+
+        get_user_info();
+    }
+
+    public  void get_user_info()
+    {
+        SharedPreferences sp = getActivity().getSharedPreferences("user_info" , MODE_PRIVATE);
+        String username = sp.getString("username","");
+
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("module" , "get_user_info");
+            jsonObject.put("username" , username );
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url.ip, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                System.out.println(response);
+
+
+
+
+                try {
+
+                    bal = response.getString("bal");
+
+                    limits = response.getString("limit_");
+
+                    actives = response.getString("status");
+
+                    limit.setText(limits);
+
+                    if(actives.equals("1"))
+                    {
+                        active.setImageDrawable(getResources().getDrawable(R.drawable.active_user));
+
+                    }
+
+                    else {
+                        active.setImageDrawable(getResources().getDrawable(R.drawable.block_user));
+
+                    }
+
+                    balance.setText(bal);
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                System.out.println(error);
+
+            }
+        });
+
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000 , 2,2 ));
+
+
+
+
+        requestQueue.add(jsonObjectRequest);
+
+    }
 
 
 

@@ -1,6 +1,7 @@
 package com.inception.betappuser.fragments;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -23,7 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.inception.betappuser.MatchOddDetails;
+import com.inception.betappuser.MatchDetailsActivity;
 import com.inception.betappuser.R;
 import com.inception.betappuser.url;
 
@@ -31,10 +33,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.SecureRandom;
+import java.security.cert.X509Certificate;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TimeZone;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -49,9 +61,13 @@ public class ShowFragments extends Fragment {
 
     private ProgressDialog progressDialog;
 
-    private RequestQueue mRequestQueue;
+    private  RequestQueue mRequestQueue;
 
     ArrayList<String> blocked_id;
+
+    public static int BETTING_TIME = 2 , BETTING_START_TIME = 0;
+
+    private String curr_time ;
 
     public ShowFragments() {
 // Required empty public constructor
@@ -76,23 +92,28 @@ public class ShowFragments extends Fragment {
         progressDialog.setMessage("Please wait");
         progressDialog.show();
 
+        blocked_id = new ArrayList<>();
+
 
         mRequestQueue = Volley.newRequestQueue(getContext());
 
 
+
         get_data();
+
+        get_bet_time();
 
         return v;
     }
 
 
     private void get_data() {
-        block_detail();
+         block_detail();
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.GET, "https://www.lotusbook.com/api/exchange/eventType/4", new JSONObject(), new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
 
-                System.out.println(response);
+                System.out.println("response:   "+response);
 
                 progressDialog.hide();
 
@@ -114,13 +135,15 @@ public class ShowFragments extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
 
+
+                System.out.println("error  response:   "+error);
             }
         });
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
 
 
-        mRequestQueue.add(jsonObjectRequest);
+        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
 
 
     }
@@ -166,7 +189,7 @@ public class ShowFragments extends Fragment {
 
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
 
-        Volley.newRequestQueue(getActivity()).add(jsonObjectRequest);
+        mRequestQueue.add(jsonObjectRequest);
     }
 
     private class Adapter extends RecyclerView.Adapter<view_holder> {
@@ -194,14 +217,29 @@ public class ShowFragments extends Fragment {
                         @Override
                         public void onClick(View v) {
 
-                            Intent i = new Intent(getContext(), MatchOddDetails.class);
                             try {
+
+                            if(time_diff(curr_time , getDate(jsonObject.getString("openDate"))) > BETTING_START_TIME )
+                            {
+                                Toast.makeText(getContext(),"bettng not started yet" , Toast.LENGTH_SHORT).show();
+                            }
+
+                            else {
+
+                                Intent i = new Intent(getContext(), MatchDetailsActivity.class);
+
                                 i.putExtra("event_id", jsonObject.getString("id"));
+                                i.putExtra("opendate", jsonObject.getString("openDate"));
+                                i.putExtra("match_vs", jsonObject.getString("name"));
+
+                                startActivity(i);
+                            }
+
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
 
-                            startActivity(i);
+
 
                         }
                     });
@@ -239,7 +277,7 @@ public class ShowFragments extends Fragment {
             formatter.setTimeZone(TimeZone.getTimeZone("GMT"));
             Date value = formatter.parse(OurDate);
 
-            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM, dd, yyyy, hh:mm:ss aa"); //this format changeable
+            SimpleDateFormat dateFormatter = new SimpleDateFormat("MMM, dd, yyyy hh:mm:ss a"); //this format changeable
             dateFormatter.setTimeZone(TimeZone.getDefault());
             OurDate = dateFormatter.format(value);
 
@@ -249,5 +287,141 @@ public class ShowFragments extends Fragment {
         }
         return OurDate;
     }
+
+    private void get_server_time()
+    {
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("module", "get date time");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(jsonObject);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url.ip, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                System.out.println(response);
+
+                try {
+
+                    if(response.has("date"))
+                    {
+
+                        curr_time = response.getString("date");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                System.out.println(error);
+
+
+            }
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
+
+        mRequestQueue .add(jsonObjectRequest);
+    }
+
+    public void get_bet_time() {
+        JSONObject jsonObject = new JSONObject();
+
+        try {
+            jsonObject.put("module", "betting_time");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        System.out.println(jsonObject);
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url.ip, jsonObject, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+
+                System.out.println(response);
+
+                try {
+
+                    if(response.has("betting_time"))
+                    {
+
+                        BETTING_TIME = response.getInt("betting_time");
+
+                        BETTING_START_TIME = response.getInt("betting_start_time");
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+                System.out.println(error);
+
+
+            }
+        });
+
+        jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(20000, 2, 2));
+
+        mRequestQueue.add(jsonObjectRequest);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        get_server_time();
+    }
+
+
+    private int time_diff( String date1_s  , String date2_s)
+    {
+        System.out.println("date 1 is  : "+date1_s);
+
+        System.out.println("date  2  is : "+date2_s);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM, dd, yyyy hh:mm:ss aa");
+        Date  date1 = null;
+        try {
+            date1 = simpleDateFormat.parse(date1_s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        Date date2 = null;
+        try {
+            date2 = simpleDateFormat.parse(date2_s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        long difference = date2.getTime() - date1.getTime();
+
+        int min = (int) difference/(1000*60);
+
+        System.out.println("time difference in milisec is  :   "+difference);
+
+
+        System.out.println("time difference in minutes is  :   "+min);
+
+
+        return min ;
+    }
+
+
 
 }

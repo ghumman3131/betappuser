@@ -209,9 +209,6 @@ public class LoginActivity extends AppCompatActivity  {
                         JSONObject data=response.getJSONObject("result");
                         SharedPreferences.Editor sp_login = getSharedPreferences("user_info" , MODE_PRIVATE).edit();
                         sp_login.putString("username" , mEmailView.getText().toString());
-                        sp_login.putString("balance" , data.getString("bal"));
-                        sp_login.putString("status" , data.getString("status"));
-                        sp_login.putString("limit", data.getString("limit_"));
                         sp_login.putString("dis_id", data.getString("dis_id"));
                         sp_login.commit();
                         Intent i = new Intent(LoginActivity.this , HomeActivity.class);

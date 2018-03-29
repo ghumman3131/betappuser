@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/rounded_solid"
+    android:backgroundTint="@color/white">
+
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter balance"
+        android:inputType="number"
+        android:textColor="@color/black"
+        android:id="@+id/balance_et"
+        android:layout_marginTop="20dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="right"
+        android:layout_marginTop="10dp"
+        >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="CANCEL"
+            android:id="@+id/cancel_btn"
+            android:textColor="@color/black"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="right"
+            />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@null"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="SEND"
+        android:id="@+id/send_btn"
+        android:textColor="@color/colorPrimary"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="right"
+        android:layout_marginLeft="10dp"
+        />
+
+    </LinearLayout>
+
+</LinearLayout>

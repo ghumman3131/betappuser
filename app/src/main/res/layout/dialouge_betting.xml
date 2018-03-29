@@ -159,6 +159,9 @@
         android:minWidth="100dp"
         android:layout_alignStart="@+id/stake_txt"
         android:textColor="@color/black"
+        android:inputType="number"
+        android:maxLines="1"
+        android:imeOptions="actionDone"
 
         />
 

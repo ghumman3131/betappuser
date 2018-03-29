@@ -5,141 +5,192 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="10dp"
-    tools:context="com.inception.betappuser.fragments.UserDetails">
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#fe3577a6"
-        android:id="@+id/lay_user"
-        android:padding="10dp"
 
-        >
-
-
-        <ImageView
-            android:id="@+id/profile_img"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:src="@drawable/profile"
-            />
-
-        <TextView
-            android:id="@+id/name_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="0dp"
-            android:layout_toRightOf="@+id/profile_img"
-            android:text="Name"
-            android:textColor="@color/white"
-            android:textSize="20sp"
-            />
-
-        <TextView
-            android:id="@+id/balance_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name_txt"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/profile_img"
-            android:text="Balance"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/name_txt"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/balance_txt"
-            android:text="00"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/limit_txt"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/balance_txt"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/profile_img"
-            android:text="Limit"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/limit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/balance"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@+id/limit_txt"
-            android:text="00"
-            android:textColor="@color/white" />
-
-        <ImageView
-            android:id="@+id/active"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/name_txt"
-            android:layout_marginRight="30dp"
-            android:src="@drawable/active_user" />
-
-    </RelativeLayout>
-    <LinearLayout
-        android:id="@+id/pass_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/l_grey"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
-        android:layout_below="@+id/lay_user"
-        android:padding="5dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@android:drawable/ic_lock_idle_lock" />
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Change Password"
-    android:textSize="15dp"/>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/change_pass_lay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@color/l_grey"
-        android:gravity="center_vertical"
-        android:orientation="vertical"
-        android:layout_below="@+id/pass_lay"
-        android:padding="5dp">
-
-        <EditText
+        <RelativeLayout
+            android:id="@+id/lay_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="New password"
-            android:id="@+id/chnge_pass"/>
+            android:background="#fe3577a6"
+            android:padding="10dp"
 
-        <Button
-            android:layout_width="wrap_content"
+            >
+
+
+            <ImageView
+                android:id="@+id/profile_img"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/profile" />
+
+            <TextView
+                android:id="@+id/name_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="0dp"
+                android:layout_toRightOf="@+id/profile_img"
+                android:text="Name"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/balance_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_txt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/profile_img"
+                android:text="Balance"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/balance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name_txt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/balance_txt"
+                android:text="00"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/limit_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/balance_txt"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/profile_img"
+                android:text="Limit"
+                android:textColor="@color/white" />
+
+            <TextView
+                android:id="@+id/limit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/balance"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="20dp"
+                android:layout_toRightOf="@+id/limit_txt"
+                android:text="00"
+                android:textColor="@color/white" />
+
+            <ImageView
+                android:id="@+id/active"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/name_txt"
+                android:layout_marginRight="30dp"
+                android:src="@drawable/active_user" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/pass_lay"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:text="Change Password"
-            android:onClick="change_pass"
-            />
-    </LinearLayout>
+            android:layout_below="@+id/lay_user"
+            android:layout_margin="10dp"
+            android:background="@color/l_grey"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_lock_idle_lock" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Change Password"
+                android:textSize="15dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/change_pass_lay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pass_lay"
+            android:layout_margin="10dp"
+            android:background="@color/l_grey"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            android:padding="5dp">
+
+            <EditText
+                android:id="@+id/chnge_pass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New password" />
+
+            <Button
+                android:id="@+id/change_pass"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="Change Password"
+                android:textColor="@color/colorPrimary"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/l_grey"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:clickable="true"
+            android:onClick="transfer_balance"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_transfer"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Transfer Balance"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimary"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/l_grey"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:clickable="true"
+            android:onClick="open_statements"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_transfer"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Statements"
+                android:textSize="15sp"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/colorPrimary"
+                />
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>
